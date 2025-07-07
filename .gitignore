@@ -1,0 +1,11 @@
+# Virtual environments
+.venv/
+.env
+__pycache__/
+
+# Data folders
+data/raw/
+data/cleaned/
+
+# VS Code settings
+.vscode/
