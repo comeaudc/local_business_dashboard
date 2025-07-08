@@ -27,4 +27,4 @@ df = df.dropna()
 df = df.drop_duplicates(subset="ZipCode")
 
 df.to_csv(cleaned_path, index=False)
-print(f"Cleaned Data saved to {cleaned_path}")
+print(f"✅ Cleaned Data saved to {cleaned_path}")

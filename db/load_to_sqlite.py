@@ -1,8 +1,8 @@
 import sqlite3
-import panda as pd
+import pandas as pd
 
 # Paths
-cleaned_path = "data/cleaned/cleaned_census_by_zip"
+cleaned_path = "data/cleaned/cleaned_census_by_zip.csv"
 db_path = "db/local_data.db"
 schema_path = "db/schema.sql"
 
@@ -19,5 +19,16 @@ with open(schema_path, "r") as f:
 
 #  Prepare DataFrame to match schema
 df.rename(columns = {
-    
-})
+    "ZipCode": "zip_code",
+    "AreaName": "area_name",
+    "Population": "population",
+    "MedianIncome": "median_income"
+}, inplace=True)
+
+# Insert Into Table
+df.to_sql("census_data", conn, if_exists="replace", index=False)
+
+conn.commit()
+conn.close()
+
+print(f"✅ Data loaded into {db_path} using schema from {schema_path}")
