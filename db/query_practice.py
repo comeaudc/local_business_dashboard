@@ -20,8 +20,14 @@ try:
 
         # Fetch and print results
         results = cursor.fetchall()
-        for row in results:
-            print(row)
+        print("ZIPs with population > 50,000:")
+        # for row in results:
+        #     print(row)
+
+        # Extra Formatting
+        for zip_code, area_name, population, median_income in results:
+            print(f"{zip_code} | {area_name} | Population: {population:,} | Median Income: ${median_income:,.2f}")
+
 
         # Run the query to calculate average population
         cursor.execute("""
@@ -39,5 +45,5 @@ except sqlite3.DatabaseError as e:
     sys.exit(1)
 
 except Exception as e:
-    print(f"❌ Unexpexted Error: {e}")
+    print(f"❌ Unexpected Error: {e}")
     sys.exit(1)
