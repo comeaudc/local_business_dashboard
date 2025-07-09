@@ -25,6 +25,7 @@ try:
         "MedianIncome": "median_income"
     }, inplace=True)
 
+    os.makedirs(os.path.dirname(cleaned_path), exist_ok=True)
     # Open DB with context manager
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()  # cursor allow me to write/edit data to db like pen
