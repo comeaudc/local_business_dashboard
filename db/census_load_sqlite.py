@@ -6,7 +6,7 @@ import sys
 # Paths
 cleaned_path = "data/cleaned/cleaned_census_by_zip.csv"
 db_path = "db/local_data.db"
-schema_path = "db/census_schema.sql"
+schema_path = "db/schemas/census_schema.sql"
 
 
 try:

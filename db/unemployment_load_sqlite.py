@@ -6,7 +6,7 @@ import sys
 # Paths
 cleaned_path = "data/cleaned/cleaned_unemployment.csv"
 db_path = "db/local_data.db"
-schema_path = "db/unemployment_schema.sql"
+schema_path = "db/schemas/unemployment_schema.sql"
 
 try:
     if not os.path.exists(cleaned_path):
