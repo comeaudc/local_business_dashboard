@@ -25,13 +25,13 @@ try:
         "MedianIncome": "median_income"
     }, inplace=True)
 
-    os.makedirs(os.path.dirname(cleaned_path), exist_ok=True)
+    os.makedirs(os.path.dirname(db_path), exist_ok=True)
     # Open DB with context manager
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()  # cursor allow me to write/edit data to db like pen
 
         if not os.path.exists(schema_path):
-            raise FileNotFoundError(f"Missing CSV file: {schema_path}")
+            raise FileNotFoundError(f"Missing Schema file: {schema_path}")
 
         # Load schema from .sql file
         with open(schema_path, "r") as f:
