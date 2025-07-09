@@ -21,7 +21,7 @@ body = {
     "registrationKey": apiKey
 }
 
-def fetch_unemployement_data():
+def fetch_unemployment_data():
     if not apiKey:
         raise ValueError("❌ Missing BLS api key. Check .env file.")
     
@@ -55,7 +55,9 @@ def fetch_unemployement_data():
                 ]
                 rows.append(row)
 
-        with open("data/raw/unemplyement.csv", "w", newline="") as f:
+        # Make sure directory exists and if not make one
+        os.makedirs("data/raw", exist_ok=True)
+        with open("data/raw/unemployment.csv", "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerow(headers)
             writer.writerows(rows)
@@ -75,4 +77,4 @@ def fetch_unemployement_data():
         print(f"❌ Unexpected error: {e}")
 
 if __name__ == "__main__":
-    fetch_unemployement_data()
+    fetch_unemployment_data()
