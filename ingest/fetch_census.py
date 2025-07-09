@@ -18,6 +18,8 @@ def fetch_median_data():
         data = response.json()
         headers = data[0]
         rows = data[1:]
+
+        os.makedirs("data/raw", exist_ok=True)
         with open("data/raw/census_by_zip.csv", "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerow(headers)

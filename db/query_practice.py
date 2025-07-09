@@ -41,6 +41,7 @@ try:
     print(f"📊 Average population across ZIP codes: {int(average_population):,}")
 
 except sqlite3.DatabaseError as e:
+    
     print(f"❌ SQLite Error: {e}")
     sys.exit(1)
 
