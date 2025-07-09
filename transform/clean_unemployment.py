@@ -25,6 +25,7 @@ try:
     # Clean dataframe with panda
     df["year"] = pd.to_numeric(df["year"], errors="coerce")
     df["value"] = pd.to_numeric(df["value"], errors="coerce")
+    df['geo_fips'] = df["series_id"].str[5:10]
 
     # Drop Nan Valued rows
     df = df.dropna(subset=["year", "value"])
