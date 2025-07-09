@@ -1,3 +1,4 @@
+```
 local-business-dashboard/
 │
 ├── ingest/                # Scripts to pull raw data from APIs
@@ -22,3 +23,8 @@ local-business-dashboard/
 ├── README.md              # Project overview
 └── run_all.py             # Optional main script to run all steps
 
+```
+
+[United Census Bureau](https://www.census.gov/en.html) - API For all census data (i.e. median income by zip, ect)
+
+[Bureau of Statistics](https://www.bls.gov/) - API For unemployment data
