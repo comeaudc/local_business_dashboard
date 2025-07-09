@@ -65,6 +65,12 @@ def fetch_unemployement_data():
     except requests.exceptions.RequestException as e:
         print(f"❌ Network error during request: {e}")
 
+    except ValueError as e:
+        print(f"❌ Data format error: {e}")
+
+    except KeyError as e:
+        print(f"Missing Expected columns in API Response: {e}")
+
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
 
