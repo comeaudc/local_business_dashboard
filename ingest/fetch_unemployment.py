@@ -9,6 +9,9 @@ load_dotenv()
 apiKey = os.environ.get("blsAPI")
 URL = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
 
+# Paths
+raw_path = "data/raw/unemployment.csv"
+
 body = {
         "seriesid": [
         "LAUCN040010000000003",
@@ -56,13 +59,13 @@ def fetch_unemployment_data():
                 rows.append(row)
 
         # Make sure directory exists and if not make one
-        os.makedirs("data/raw", exist_ok=True)
-        with open("data/raw/unemployment.csv", "w", newline="") as f:
+        os.makedirs(os.path.dirname(raw_path), exist_ok=True)
+        with open(raw_path, "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerow(headers)
             writer.writerows(rows)
 
-        print(f"✅ Saved Unemplyement data for {len(rows)} series to data/raw/unemlpoyement.csv")
+        print(f"✅ Saved Unemplyement data for {len(rows)} series to {raw_path}")
     
     except requests.exceptions.RequestException as e:
         print(f"❌ Network error during request: {e}")

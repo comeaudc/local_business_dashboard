@@ -1,11 +1,9 @@
 import requests
 import csv
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 BASE_URL = 'https://api.census.gov/data/2021/acs/acs5'
+raw_path = "data/raw/census_by_zip.csv"
 
 PARAMS = {
     "get": "NAME,B01003_001E,B19013_001E",
@@ -30,13 +28,13 @@ def fetch_median_data():
         rows = data[1:]
 
         # Make sure directory exists and if not make one
-        os.makedirs("data/raw", exist_ok=True)
-        with open("data/raw/census_by_zip.csv", "w", newline="") as f:
+        os.makedirs(os.path.dirname(raw_path), exist_ok=True)
+        with open(raw_path, "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerow(headers)
             writer.writerows(rows)
 
-        print("✅ Census data saved to data/raw/census_by_zip.csv")
+        print(f"✅ Census data saved to {raw_path}")
     except requests.exceptions.RequestException as e:
         print(f"❌ Network error during request: {e}")
 
