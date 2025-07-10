@@ -10,7 +10,9 @@ SELECT
     u.geo_fips,
     z.zip_code,
     z.city,
-    z.state
+    z.state,
+    c.population,
+    c.median_income
 FROM unemployment_data u
-JOIN zip_to_fip z
-    ON u.geo_fips = z.county_fips;
+JOIN zip_to_fip z ON u.geo_fips = z.county_fips
+JOIN census_data c ON c.zip_code = z.zip_code;
