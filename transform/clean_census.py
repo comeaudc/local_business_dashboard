@@ -5,41 +5,46 @@ import os
 raw_path = "data/raw/census_by_zip.csv"
 cleaned_path = "data/cleaned/cleaned_census_by_zip.csv"
 
-try:
-    if not os.path.exists(raw_path):
-        raise FileNotFoundError(f"Missing CSV File: {raw_path}")
-    
-    # Load Dataframe aka table of data
-    df = pd.read_csv(raw_path)
+def clean_census():
 
-    # Preview Data (test as we go!!!) - can view columns as so, or whole dataset (whole data set will be very slow)
-    # print('📊', df.columns.tolist())
+    try:
+        if not os.path.exists(raw_path):
+            raise FileNotFoundError(f"Missing CSV File: {raw_path}")
+        
+        # Load Dataframe aka table of data
+        df = pd.read_csv(raw_path)
 
-    # Rename columns for clarity
-    df.columns = ['AreaName', 'Population', 'MedianIncome', 'ZipCode']
+        # Preview Data (test as we go!!!) - can view columns as so, or whole dataset (whole data set will be very slow)
+        # print('📊', df.columns.tolist())
 
-    # Testing again!
-    # print('📊', df.columns.tolist())
+        # Rename columns for clarity
+        df.columns = ['AreaName', 'Population', 'MedianIncome', 'ZipCode']
 
-    df['ZipCode'] = df['ZipCode'].astype(str).str.zfill(5) # Keeps leading zeros
-    df['Population'] = pd.to_numeric(df['Population'], errors='coerce') # try to set as number, if not "coerce" to nan"
-    df["MedianIncome"] = pd.to_numeric(df["MedianIncome"], errors='coerce')# try to set as number, if not "coerce" to nan"
+        # Testing again!
+        # print('📊', df.columns.tolist())
 
-    # Remove Rows that now contain NaN
-    df = df.dropna()
+        df['ZipCode'] = df['ZipCode'].astype(str).str.zfill(5) # Keeps leading zeros
+        df['Population'] = pd.to_numeric(df['Population'], errors='coerce') # try to set as number, if not "coerce" to nan"
+        df["MedianIncome"] = pd.to_numeric(df["MedianIncome"], errors='coerce')# try to set as number, if not "coerce" to nan"
 
-    # Remove duplicates if you want
-    df = df.drop_duplicates(subset="ZipCode")
+        # Remove Rows that now contain NaN
+        df = df.dropna()
 
-    os.makedirs(os.path.dirname(cleaned_path), exist_ok=True)
-    df.to_csv(cleaned_path, index=False)
-    print(f"✅ Cleaned Data saved to {cleaned_path}")
+        # Remove duplicates if you want
+        df = df.drop_duplicates(subset="ZipCode")
 
-except FileNotFoundError as e:
-    print(f"❌ File Error: {e}")
+        os.makedirs(os.path.dirname(cleaned_path), exist_ok=True)
+        df.to_csv(cleaned_path, index=False)
+        print(f"✅ Cleaned Data saved to {cleaned_path}")
 
-except pd.errors.ParserError as e:
-    print(f"❌ Parsing Error: {e}")
+    except FileNotFoundError as e:
+        print(f"❌ File Error: {e}")
 
-except Exception as e:
-    print(f"❌ Unexpected Error: {e}")
+    except pd.errors.ParserError as e:
+        print(f"❌ Parsing Error: {e}")
+
+    except Exception as e:
+        print(f"❌ Unexpected Error: {e}")
+
+if __name__ == "__main__":
+    clean_census()

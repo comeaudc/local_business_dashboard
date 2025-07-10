@@ -24,7 +24,7 @@ body = {
     "registrationKey": apiKey
 }
 
-def fetch_unemployment_data():
+def fetch_unemployment():
     if not apiKey:
         raise ValueError("❌ Missing BLS api key. Check .env file.")
     
