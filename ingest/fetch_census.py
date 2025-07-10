@@ -35,6 +35,7 @@ def fetch_median_data():
             writer.writerows(rows)
 
         print(f"✅ Census data saved to {raw_path}")
+        
     except requests.exceptions.RequestException as e:
         print(f"❌ Network error during request: {e}")
 
