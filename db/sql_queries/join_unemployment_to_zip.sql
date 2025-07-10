@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS unemployment_zip_joined;
+
+CREATE TABLE unemployment_zip_joined AS
 SELECT
     u.series_id,
     u.year,
@@ -10,4 +13,4 @@ SELECT
     z.state
 FROM unemployment_data u
 JOIN zip_to_fip z
-    ON u.geo_fips = z.county_fips
+    ON u.geo_fips = z.county_fips;

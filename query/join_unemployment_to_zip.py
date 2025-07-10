@@ -23,12 +23,13 @@ def join_zip_to_unemployment():
             
             # Open sql query
             with open(sql_path, "r") as f:
-                query = f.read()
+                cursor.executescript(f.read())
 
-            # Execute SQL Query
-            df = pd.read_sql_query(query, conn)
-
+            # # Execute SQL Query
+            df = pd.read_sql("SELECT * FROM unemployment_zip_joined", conn)
+            os.makedirs(os.path.dirname(joined_csv), exist_ok=True)
             df.to_csv(joined_csv, index=False)
+    
             
             print(f"✅ Exported joined data to {joined_csv}")
 
